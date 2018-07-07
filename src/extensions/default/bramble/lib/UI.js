@@ -126,13 +126,14 @@ define(function (require, exports, module) {
         }
 
         var sidebarVisible = BrambleStartupState.ui("sidebarVisible");
-        if(sidebarVisible !== null) {
+        /*if(sidebarVisible !== null) {
             if(sidebarVisible) {
                 SidebarView.show();
             } else {
                 SidebarView.hide();
             }
-        }
+        }*/
+        SidebarView.hide();
 
         var secondPaneWidth = BrambleStartupState.ui("secondPaneWidth");
         var firstPaneWidth = BrambleStartupState.ui("firstPaneWidth");
