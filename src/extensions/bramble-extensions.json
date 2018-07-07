@@ -58,6 +58,17 @@
         ]
     },
     {
+        "path": "extensions/default/InlineTimingFunctionEditor",
+        "less": {
+            "dist/extensions/default/InlineColorEditor/css/main.css": [
+                "src/extensions/default/InlineTimingFunctionEditor/main.less"
+            ]
+        },
+        "copy": [
+            "extensions/default/InlineTimingFunctionEditor/*.png"
+        ]
+    },
+    {
         "path": "extensions/default/InlineBorderRadiusEditor",
         "less": {
             "dist/extensions/default/InlineBorderRadiusEditor/css/main.css": [
