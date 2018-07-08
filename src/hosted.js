@@ -115,6 +115,12 @@
             bramble.on("activeEditorChange", function() {
                 console.log("Bramble activeEditorChange called");
             });
+            
+            bramble.on("documentChange", function(args) {
+                console.log("Bramble documentChange called" + args.fullPath, args.fileName, args.content);
+            });
+            
+            
         });
 
         Bramble.once("error", function(err) {

@@ -7,6 +7,7 @@ define(function (require, exports, module) {
     var BrambleEvents = brackets.getModule("bramble/BrambleEvents");
     var MainViewManager = brackets.getModule("view/MainViewManager");
     var ViewCommandHandlers = brackets.getModule("view/ViewCommandHandlers");
+    var Document = brackets.getModule("document/Document");
     var Path = brackets.getModule("filesystem/impls/filer/FilerUtils").Path;
     var PreferencesManager = brackets.getModule("preferences/PreferencesManager");
     var UI = require("lib/UI");
@@ -89,6 +90,19 @@ define(function (require, exports, module) {
             sendEvent({
                 type: "bramble:projectSaved"
             });
+        });
+        
+        Document.on("documentChange", function (event, document, changeList) {
+            
+            sendEvent({
+                type: "bramble:documentChange",
+                fullPath: document.file.fullPath,
+                fileName: document.file.name,
+                content: document.getText(),
+                noLines: document._masterEditor.lineCount(),
+                changeList: JSON.stringify(changeList)
+            });
+
         });
 
         // Listen for the user changing what file is being viewed

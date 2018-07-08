@@ -450,6 +450,12 @@ define([
                     } else if (eventName === "activeEditorChange") {
                         _state.fullPath = data.fullPath;
                         _state.filename = data.filename;
+                    } else if (eventName === "documentChange") {
+                        _state.fullPath   = data.fullPath;
+                        _state.fileName   = data.fileName;
+                        _state.content    = data.content;
+                        _state.noLines    = data.noOfLines;
+                        _state.changeList = data.changeList;
                     } else if (eventName === "previewModeChange") {
                         _state.previewMode = data.mode;
                     } else if (eventName === "themeChange") {

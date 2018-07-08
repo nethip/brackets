@@ -341,7 +341,11 @@ define(function (require, exports, module) {
                     }
                 ];
             }
-
+            
+            //DocumentManager.notifyFileDeleted(doc.file);
+            result.resolve();
+            
+            /*
             Dialogs.showModalDialog(dialogId, title, message, buttons)
                 .done(function (id) {
                     if (id === Dialogs.DIALOG_BTN_DONTSAVE) {
@@ -381,7 +385,22 @@ define(function (require, exports, module) {
                         result.resolve();
                     }
                 });
-
+                
+            */
+            
+            // Discard - load changes from disk
+            reloadDoc(doc)
+                .done(function () {
+                    result.resolve();
+                })
+                .fail(function (error) {
+                    // Unable to load changed version from disk - show error UI
+                    showReloadError(error, doc)
+                        .done(function () {
+                            // After user dismisses, move on to next conflict prompt
+                            result.reject();
+                        });
+                });
             return promise;
         }
 
