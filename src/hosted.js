@@ -67,7 +67,7 @@
                 });
             }
 
-            writeProjectFile("script.js", script, function() {
+            /*writeProjectFile("script.js", script, function() {
                 writeProjectFile("style.css", css, function() {
                     writeProjectFile("index.html", index, function() {
                         writeProjectFile("tutorial.html", tutorial, function() {
@@ -75,7 +75,11 @@
                         });
                     });
                 });
+            });*/
+            writeProjectFile("tutorial.html", tutorial, function() {
+                callback();
             });
+            
         });
     }
 
