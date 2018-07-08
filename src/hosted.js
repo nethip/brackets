@@ -111,6 +111,10 @@
             bramble.on("capacityRestored", function() {
                 console.log("[Bramble] capacityRestored event.");
             });
+            
+            bramble.on("activeEditorChange", function() {
+                console.log("Bramble activeEditorChange called");
+            });
         });
 
         Bramble.once("error", function(err) {
@@ -129,12 +133,23 @@
         Bramble.on("updatesAvailable", function() {
             console.log("Bramble offline content updated, please refresh to use.");
         });
+        
+        Bramble.on("activeEditorChange", function() {
+            console.log("Bramble activeEditorChange called");
+        });
+        
 
         // Setup the filesystem while Bramble is loading
         ensureFiles(Bramble, function() {
             // Now that fs is setup, tell Bramble which root dir to mount
             // and which file within that root to open on startup.
             Bramble.mount(projectRoot);
+            Bramble.addNewFile({
+                filename: 'new.css',
+                contents: ""
+            }, function(){
+                console.log('NewFileAdded');
+            });
         });
     }
 
@@ -144,13 +159,14 @@
 
     if(isSrc) {
         console.log("Bramble src/ build");
-        brambleModule = "../dist/bramble";
+        brambleModule = "bramble/client/main";
     } else {
         console.log("Bramble dist/ build");
-        brambleModule = "bramble";
+        brambleModule = "../dist/bramble";
     }
 
     require([brambleModule], function(Bramble) {
         load(Bramble);
+        window.Bramble = Bramble;
     });
 }());

@@ -156,6 +156,20 @@ define([
             }
         });
     };
+    
+    Bramble.addNewFile = function(options, callback) {
+        // We only support writing textual data this way
+        if(typeof(options.contents) !== "string") {
+            callback(new Error("expected string for file contents"));
+            return;
+        }
+
+        _instance._executeRemoteCommand({
+            commandCategory: "bramble",
+            command: "BRAMBLE_ADD_NEW_FILE",
+            args: [options]
+        }, callback);
+    };
 
     // Start loading Bramble's resources, setup communication with iframe
     Bramble.load = function(div, options) {
